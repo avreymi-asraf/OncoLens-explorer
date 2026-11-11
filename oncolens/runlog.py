@@ -4,6 +4,7 @@ Every run writes the same files, so any run can be watched and any two runs comp
 
     <run-dir>/config.json     the RunConfig, the experiment and run names, the code commit
     <run-dir>/metrics.jsonl   one JSON object per logged event, appended and flushed as it happens
+    <run-dir>/events.jsonl    one JSON object per event the detectors raised (oncolens/detect.py), as it was raised
     <run-dir>/status.json     state (running | finished | failed), step, heartbeat, links; rewritten atomically
     <run-dir>/summary.json    final numbers, written once at the end
 
@@ -56,7 +57,9 @@ class RunLog:
         self.exp, self.run, self.total_steps = exp, run, total_steps
         self.info: dict = {"exp": exp, "run": run, "commit": code_commit(), "started": time.time()}
         write_json(self.dir / "config.json", {**self.info, "config": config})
+        self.rows: list[dict] = []  # everything logged so far, for the detectors
         self._metrics = (self.dir / "metrics.jsonl").open("a", encoding="utf-8")
+        self._events = (self.dir / "events.jsonl").open("a", encoding="utf-8")
         self._wandb = None
         if use_wandb:
             self._wandb = _init_wandb(config, exp, run, self.info["commit"])
@@ -72,10 +75,20 @@ class RunLog:
 
     def log(self, step: int, **scalars: float) -> None:
         row = {"step": step, "time": round(time.time(), 3), **scalars}
+        self.rows.append(row)
         self._metrics.write(json.dumps(row) + "\n")
         self._metrics.flush()
         if self._wandb:
             self._wandb.log(scalars, step=step)
+
+    def event(self, event: dict) -> None:
+        """An event raised by a detector: to events.jsonl, to the process output, and to W&B (as `events/<kind>` = its step)."""
+        self._events.write(json.dumps({"time": round(time.time(), 3), **event}) + "\n")
+        self._events.flush()
+        print(f"[event {event['severity']}] step {event['step']}: {event['message']}", flush=True)
+        if self._wandb:
+            self._wandb.log({f"events/{event['kind']}": event["step"]}, step=max(event["step"], self.rows[-1]["step"] if self.rows else 0))
+            self._wandb.summary[f"event/{event['kind']}/{event['subject']}"] = event["message"]
 
     def status(self, state: str, step: int, **extra) -> None:
         write_json(self.dir / "status.json", {"state": state, "step": step, "total_steps": self.total_steps,
@@ -92,6 +105,7 @@ class RunLog:
 
     def _close(self, summary: dict, exit_code: int) -> None:
         self._metrics.close()
+        self._events.close()
         if self._wandb:
             self._wandb.summary.update(summary)
             self._wandb.finish(exit_code=exit_code)
