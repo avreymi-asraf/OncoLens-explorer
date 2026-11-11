@@ -50,8 +50,7 @@ uv run scripts/lab.py run --exp 00 -- 'uv run -m oncolens.watch notes/00-explore
 ```
 
 ## 3. Open Questions
-* Does the whole path work from a Colab VM: the data fetch, W&B, the Hub upload, the mirror back? (Round 2.)
-* Can the run be read from this session while it is still running, both from the mirrored folder and from W&B?
+None left for this experiment. Both were answered in round 2 (see `log.md`): the whole path works from a Colab VM, and a run is readable mid-run from the mirrored folder (about one poll behind) and from W&B (about ten seconds behind).
 
 ## 4. Stopping Point
-Enough: one run on Colab that finished, was read while running from both sources, left a model on the Hub that reads back identical, and left its run folder on the branch. Not worth more: three rounds lost to the same infrastructure blocker; then close as `INFRA_INCONCLUSIVE` and say which link is broken. Improving the model's numbers is out of scope whatever they are.
+Reached in round 2. Was: one run on Colab that finished, was read while running from both sources, left a model on the Hub that reads back identical, and left its run folder on the branch. Improving the model's numbers was out of scope.

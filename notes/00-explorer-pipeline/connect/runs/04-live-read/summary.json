@@ -1,0 +1,25 @@
+{
+  "exp": "00-explorer-pipeline/connect",
+  "run": "04-live-read",
+  "commit": "6a08fdc",
+  "started": 1794430843.3471289,
+  "wandb_url": "https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/fss0n2x2",
+  "wandb_path": "avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/fss0n2x2",
+  "device": "cpu",
+  "data": {
+    "n_patients": 2000,
+    "n_features": 53,
+    "n_train": 1609,
+    "n_val": 391,
+    "positive_rate_train": 0.7253,
+    "positive_rate_val": 0.7417
+  },
+  "hub_url": "https://huggingface.co/avreymi/oncolens-explorer/tree/main/00-explorer-pipeline/connect/04-live-read",
+  "hub_commit": "2c06edc8d0cb47d2bebd72601ae14597094ce03f",
+  "steps": 60000,
+  "val/loss": 2.0422306060791016,
+  "val/auroc": 0.794400819392284,
+  "train_eval/loss": 0.014185607433319092,
+  "train_eval/auroc": 0.9998429666507694,
+  "hub_roundtrip_ok": true
+}

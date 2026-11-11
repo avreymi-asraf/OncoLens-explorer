@@ -1,0 +1,34 @@
+[run] 00-explorer-pipeline/connect/02-colab on cpu | data {'n_patients': 2000, 'n_features': 53, 'n_train': 1609, 'n_val': 391, 'positive_rate_train': 0.7253, 'positive_rate_val': 0.7417}
+[run] live: https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/ru6oeh11
+[step 100/3000] val/loss=0.4632 val/auroc=0.7964 train_eval/loss=0.4678 train_eval/auroc=0.8054
+[step 200/3000] val/loss=0.4650 val/auroc=0.7956 train_eval/loss=0.4408 train_eval/auroc=0.8274
+[step 300/3000] val/loss=0.4599 val/auroc=0.7993 train_eval/loss=0.4290 train_eval/auroc=0.8353
+[step 400/3000] val/loss=0.4621 val/auroc=0.7968 train_eval/loss=0.4178 train_eval/auroc=0.8462
+[step 500/3000] val/loss=0.4612 val/auroc=0.7943 train_eval/loss=0.4117 train_eval/auroc=0.8550
+[step 600/3000] val/loss=0.4617 val/auroc=0.7985 train_eval/loss=0.3989 train_eval/auroc=0.8619
+[step 700/3000] val/loss=0.4592 val/auroc=0.8008 train_eval/loss=0.3882 train_eval/auroc=0.8697
+[step 800/3000] val/loss=0.4653 val/auroc=0.8009 train_eval/loss=0.3742 train_eval/auroc=0.8816
+[step 900/3000] val/loss=0.4734 val/auroc=0.8033 train_eval/loss=0.3661 train_eval/auroc=0.8864
+[step 1000/3000] val/loss=0.4831 val/auroc=0.7967 train_eval/loss=0.3531 train_eval/auroc=0.8970
+[step 1100/3000] val/loss=0.4727 val/auroc=0.8023 train_eval/loss=0.3383 train_eval/auroc=0.9072
+[step 1200/3000] val/loss=0.4886 val/auroc=0.8003 train_eval/loss=0.3277 train_eval/auroc=0.9116
+[step 1300/3000] val/loss=0.5011 val/auroc=0.8028 train_eval/loss=0.3257 train_eval/auroc=0.9157
+[step 1400/3000] val/loss=0.4999 val/auroc=0.7985 train_eval/loss=0.3106 train_eval/auroc=0.9238
+[step 1500/3000] val/loss=0.5177 val/auroc=0.7980 train_eval/loss=0.3015 train_eval/auroc=0.9283
+[step 1600/3000] val/loss=0.5188 val/auroc=0.7957 train_eval/loss=0.2875 train_eval/auroc=0.9344
+[step 1700/3000] val/loss=0.5140 val/auroc=0.8007 train_eval/loss=0.2803 train_eval/auroc=0.9395
+[step 1800/3000] val/loss=0.5482 val/auroc=0.7968 train_eval/loss=0.2788 train_eval/auroc=0.9404
+[step 1900/3000] val/loss=0.5310 val/auroc=0.8008 train_eval/loss=0.2752 train_eval/auroc=0.9486
+[step 2000/3000] val/loss=0.5327 val/auroc=0.7906 train_eval/loss=0.2610 train_eval/auroc=0.9515
+[step 2100/3000] val/loss=0.5486 val/auroc=0.7933 train_eval/loss=0.2490 train_eval/auroc=0.9543
+[step 2200/3000] val/loss=0.5658 val/auroc=0.8011 train_eval/loss=0.2429 train_eval/auroc=0.9561
+[step 2300/3000] val/loss=0.5724 val/auroc=0.7905 train_eval/loss=0.2390 train_eval/auroc=0.9582
+[step 2400/3000] val/loss=0.6080 val/auroc=0.7932 train_eval/loss=0.2480 train_eval/auroc=0.9581
+[step 2500/3000] val/loss=0.5745 val/auroc=0.7943 train_eval/loss=0.2327 train_eval/auroc=0.9616
+[step 2600/3000] val/loss=0.5739 val/auroc=0.7900 train_eval/loss=0.2335 train_eval/auroc=0.9663
+[step 2700/3000] val/loss=0.5963 val/auroc=0.7898 train_eval/loss=0.2130 train_eval/auroc=0.9690
+[step 2800/3000] val/loss=0.6008 val/auroc=0.7953 train_eval/loss=0.2119 train_eval/auroc=0.9688
+[step 2900/3000] val/loss=0.6247 val/auroc=0.7907 train_eval/loss=0.2037 train_eval/auroc=0.9700
+[step 3000/3000] val/loss=0.6102 val/auroc=0.7853 train_eval/loss=0.1999 train_eval/auroc=0.9757
+[run] finished: {'steps': 3000, 'val/loss': 0.6102390289306641, 'val/auroc': 0.7852509388869922, 'train_eval/loss': 0.19985820353031158, 'train_eval/auroc': 0.9757199300523057, 'hub_roundtrip_ok': True}
+Transient error Service Unavailable encountered while exporting metrics batch, retrying in 0.84s.

@@ -1,0 +1,35 @@
+{
+  "exp": "00-explorer-pipeline/connect",
+  "run": "02-colab",
+  "commit": "5969c1f",
+  "started": 1794430347.1606195,
+  "config": {
+    "data": {
+      "study": "msk_chord_2024",
+      "n_patients": 2000,
+      "val_fraction": 0.2,
+      "seed": 0
+    },
+    "model": {
+      "name": "mlp",
+      "hidden": [
+        64,
+        32
+      ],
+      "dropout": 0.1
+    },
+    "train": {
+      "steps": 3000,
+      "batch_size": 64,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "eval_every": 100,
+      "checkpoint_every": 1000,
+      "seed": 0
+    },
+    "track": {
+      "wandb": true,
+      "hub": true
+    }
+  }
+}
