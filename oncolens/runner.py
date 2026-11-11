@@ -99,22 +99,27 @@ class Colab:
             path.write_text("".join(f"{k}={shlex.quote(v)}\n" for k, v in values.items()), encoding="utf-8")
             self.cli("upload", "-s", self.session, str(path), "/content/run.env", check=True, stdout=subprocess.DEVNULL)
 
-    def mirror(self, remote_dir: str, local_dir: Path) -> None:
-        """Copy the run's small files from the VM, each one replaced atomically."""
+    def mirror(self, remote_dir: str, local_dir: Path) -> bool | None:
+        """Copy the run's small files from the VM, each one replaced atomically, in ONE connection (the VM
+        accepts one ssh connection at a time and frees it slowly). Returns whether the run's process is still
+        alive, or None when the VM could not be reached."""
         names = " ".join(MIRRORED)
-        blob = self.ssh(f"cd {remote_dir} 2>/dev/null && tar cz --ignore-failed-read {names} 2>/dev/null || true", check=False, timeout=120)
-        if not blob:
-            return
-        local_dir.mkdir(parents=True, exist_ok=True)
+        blob = self.ssh(f"cd {remote_dir} && (kill -0 $(cat /content/train.pid) 2>/dev/null && echo RUNNING || echo EXITED) > run_state "
+                        f"&& tar cz --ignore-failed-read run_state {names} 2>/dev/null", check=False, timeout=120)
+        alive = None
         try:
             with tarfile.open(fileobj=io.BytesIO(blob), mode="r:gz") as archive:
+                local_dir.mkdir(parents=True, exist_ok=True)
                 for member in archive.getmembers():
-                    if member.isfile() and member.name in MIRRORED:
+                    if member.name == "run_state":
+                        alive = b"RUNNING" in archive.extractfile(member).read()
+                    elif member.isfile() and member.name in MIRRORED:
                         tmp = local_dir / (member.name + ".tmp")
                         tmp.write_bytes(archive.extractfile(member).read())
                         tmp.replace(local_dir / member.name)
-        except tarfile.TarError:
-            pass  # a truncated transfer: the next poll brings a whole one
+        except (tarfile.TarError, EOFError):
+            return None  # nothing or a truncated transfer came back: the next poll brings a whole one
+        return alive
 
 
 def run_colab(args: argparse.Namespace, exp: str) -> int:
@@ -144,22 +149,15 @@ def run_colab(args: argparse.Namespace, exp: str) -> int:
 
         seen_step = -1
         while True:
-            alive = colab.ssh("kill -0 $(cat /content/train.pid) 2>/dev/null && echo RUNNING || echo EXITED", check=False, timeout=120)
-            if not alive:  # the connection failed three times in a row; the run itself may be fine
-                print("[runner] cannot reach the VM right now; trying again", flush=True)
-                time.sleep(args.poll)
-                continue
-            colab.mirror(out, local_dir)
+            alive = colab.mirror(out, local_dir)
             status = _read_status(local_dir)
             if status.get("step", -1) != seen_step:
                 seen_step = status.get("step", -1)
                 print(f"[runner] {status.get('state', 'installing')} step {seen_step}/{status.get('total_steps')}"
                       + (f"  {status['wandb_url']}" if status.get("wandb_url") else ""), flush=True)
-            if b"EXITED" in alive:
+            if alive is False:  # that mirror was taken after the process ended, so it is the final one
                 break
             time.sleep(args.poll)
-        colab.mirror(out, local_dir)
-        status = _read_status(local_dir)
         log_path = local_dir / "train.log"
         if log_path.exists():
             print("[runner] last lines of train.log:\n" + "\n".join(log_path.read_text(encoding="utf-8", errors="replace").splitlines()[-8:]), flush=True)
