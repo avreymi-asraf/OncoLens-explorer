@@ -45,10 +45,12 @@ uv run scripts/lab.py run --exp 01 -- 'uv run -m oncolens.watch notes/01-explore
 ```
 
 ## 3. Open Questions
-* Do the detectors name each planted fault mid-run, and how late?
-* Do they stay quiet on the healthy part of a run?
-* What do the probes cost in speed?
-* Later, not here: per-patient trajectories (which patients are learned late, or never) need a rule for where patient-level values may be kept.
+Answered in round 1 (see `log.md`): each planted fault was named mid-run (overfitting at step 2,000 of 60,000; the too-hot and too-cold runs within their first 1,500 steps), nothing was raised before the first true event, and the probes cost about 13% of speed. Also changed in the shared set, found by watching: `auroc` now counts ties as half.
+
+Still open, for later experiments:
+* A run with no fault, to see what the detectors raise on it. This toy always overfits.
+* Faults that develop slowly, and a GPU run.
+* Per-patient trajectories (which patients are learned late, or never) need a rule for where patient-level values may be kept.
 
 ## 4. Stopping Point
-Enough: the three planted runs on Colab, each read mid-run, each fault named by an event before the run ended, no false event on the healthy stretch, and the cost of the probes known. Not worth more: more than about four rounds of tuning detector thresholds on this toy, since thresholds fitted to a 2,000-patient MLP say little about the models that come later; then close with what holds and list what does not.
+Reached in round 1. Was: the three planted runs on Colab, each read mid-run, each fault named by an event before the run ended, no false event on the healthy stretch, the cost of the probes known. Detector thresholds were not tuned further on this toy.
