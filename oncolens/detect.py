@@ -115,13 +115,14 @@ def dead_units(rows: list[dict]) -> list[Event]:
             if value > DEAD_FRACTION:
                 layer = key.split("/")[1]
                 found.append(_event(step, "dead_units", layer, "warning",
-                                    f"{value:.0%} of the units after {layer} are zero for every validation patient at step {step}: that part of the model has stopped contributing."))
+                                    f"{value:.0%} of the units of layer {layer} are zero for every validation patient at step {step}: that part of the model has stopped contributing."))
                 break
     return found
 
 
 UPDATE_TOO_LARGE = 0.1   # a layer changing by more than this share of its own size in one step
-UPDATE_TOO_SMALL = 1e-6  # a layer changing by less than this, after the first steps
+UPDATE_TOO_SMALL = 1e-6  # a layer changing by less than this ...
+FROZEN_PROBES = 5        # ... at this many probes in a row, up to the latest one
 
 
 @detector
@@ -135,9 +136,12 @@ def update_size(rows: list[dict]) -> list[Event]:
                 found.append(_event(step, "update_too_large", layer, "warning",
                                     f"Layer {layer} changed by {value:.0%} of its own size in one step (step {step}): steps this large overwrite what was learned."))
                 break
-        if len(values) >= 5 and all(v < UPDATE_TOO_SMALL for v in values[-5:]):
-            found.append(_event(steps[-5], "update_too_small", layer, "warning",
-                                f"Layer {layer} has moved by less than {UPDATE_TOO_SMALL:.0e} of its size per step since step {steps[-5]}: it is effectively frozen."))
+        start = len(values)  # first probe of the stretch of too-small updates that reaches the latest probe
+        while start > 0 and values[start - 1] < UPDATE_TOO_SMALL:
+            start -= 1
+        if len(values) - start >= FROZEN_PROBES:
+            found.append(_event(steps[start + FROZEN_PROBES - 1], "update_too_small", layer, "warning",
+                                f"Layer {layer} has moved by less than {UPDATE_TOO_SMALL:.0e} of its size per step since step {steps[start]}: it is effectively frozen."))
     return found
 
 

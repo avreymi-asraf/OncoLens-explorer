@@ -1,0 +1,93 @@
+[run] 01-explorer-observe/training/03-too-hot on cpu | data {'n_patients': 2000, 'n_features': 53, 'n_train': 1609, 'n_val': 391, 'positive_rate_train': 0.7253, 'positive_rate_val': 0.7417}
+[run] live: https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/7jgjvwqr
+[event warning] step 1: Layer body.0 changed by 100% of its own size in one step (step 1): steps this large overwrite what was learned.
+[event warning] step 1: Layer body.3 changed by 100% of its own size in one step (step 1): steps this large overwrite what was learned.
+[event warning] step 1: Layer head changed by 100% of its own size in one step (step 1): steps this large overwrite what was learned.
+[event critical] step 25: Training loss is 1.82e+03 at step 25, 2757 times its first value (0.66): the updates are too large.
+[step 250/20000] val/loss=0.5681 val/auroc=0.0099 train_eval/loss=0.5901 train_eval/auroc=0.0000
+[event warning] step 250: 95% of the units after body.1 are zero for every validation patient at step 250: that part of the model has stopped contributing.
+[event warning] step 250: 88% of the units after body.4 are zero for every validation patient at step 250: that part of the model has stopped contributing.
+[event warning] step 150: Layer body.0 has moved by less than 1e-06 of its size per step since step 150: it is effectively frozen.
+[event warning] step 150: Layer body.3 has moved by less than 1e-06 of its size per step since step 150: it is effectively frozen.
+[event warning] step 150: Layer head has moved by less than 1e-06 of its size per step since step 150: it is effectively frozen.
+[step 500/20000] val/loss=0.6343 val/auroc=0.0099 train_eval/loss=0.6719 train_eval/auroc=0.0000
+[step 750/20000] val/loss=0.6060 val/auroc=0.0099 train_eval/loss=0.6159 train_eval/auroc=0.0000
+[step 1000/20000] val/loss=0.5729 val/auroc=0.0099 train_eval/loss=0.5897 train_eval/auroc=0.0000
+[step 1250/20000] val/loss=0.5810 val/auroc=0.0099 train_eval/loss=0.5953 train_eval/auroc=0.0000
+[step 1500/20000] val/loss=0.5736 val/auroc=0.0099 train_eval/loss=0.5992 train_eval/auroc=0.0000
+[event warning] step 1500: Training loss is 0.5992 at step 1500, from 0.5901 at step 250: nothing is being learned. Layers move by about 0.0e+00 of their size per step.
+[step 1750/20000] val/loss=0.5764 val/auroc=0.0099 train_eval/loss=0.6029 train_eval/auroc=0.0000
+[step 2000/20000] val/loss=0.5805 val/auroc=0.0099 train_eval/loss=0.5950 train_eval/auroc=0.0000
+[step 2250/20000] val/loss=0.5687 val/auroc=0.0099 train_eval/loss=0.5879 train_eval/auroc=0.0000
+[step 2500/20000] val/loss=0.5700 val/auroc=0.0099 train_eval/loss=0.5937 train_eval/auroc=0.0000
+[step 2750/20000] val/loss=0.6000 val/auroc=0.0099 train_eval/loss=0.6323 train_eval/auroc=0.0000
+[step 3000/20000] val/loss=0.5682 val/auroc=0.0099 train_eval/loss=0.5880 train_eval/auroc=0.0000
+[step 3250/20000] val/loss=0.5816 val/auroc=0.0099 train_eval/loss=0.5958 train_eval/auroc=0.0000
+[step 3500/20000] val/loss=0.5789 val/auroc=0.0099 train_eval/loss=0.5938 train_eval/auroc=0.0000
+[step 3750/20000] val/loss=0.5772 val/auroc=0.0099 train_eval/loss=0.6040 train_eval/auroc=0.0000
+[step 4000/20000] val/loss=0.5680 val/auroc=0.0099 train_eval/loss=0.5896 train_eval/auroc=0.0000
+[step 4250/20000] val/loss=0.5698 val/auroc=0.0099 train_eval/loss=0.5934 train_eval/auroc=0.0000
+[step 4500/20000] val/loss=0.5685 val/auroc=0.0099 train_eval/loss=0.5910 train_eval/auroc=0.0000
+[step 4750/20000] val/loss=0.5683 val/auroc=0.0099 train_eval/loss=0.5904 train_eval/auroc=0.0000
+[step 5000/20000] val/loss=0.5879 val/auroc=0.0099 train_eval/loss=0.6008 train_eval/auroc=0.0000
+[step 5250/20000] val/loss=0.5678 val/auroc=0.0099 train_eval/loss=0.5890 train_eval/auroc=0.0000
+[step 5500/20000] val/loss=0.5946 val/auroc=0.0099 train_eval/loss=0.6258 train_eval/auroc=0.0000
+[step 5750/20000] val/loss=0.5749 val/auroc=0.0099 train_eval/loss=0.5910 train_eval/auroc=0.0000
+[step 6000/20000] val/loss=0.5820 val/auroc=0.0099 train_eval/loss=0.6103 train_eval/auroc=0.0000
+[step 6250/20000] val/loss=0.5701 val/auroc=0.0099 train_eval/loss=0.5883 train_eval/auroc=0.0000
+[step 6500/20000] val/loss=0.6171 val/auroc=0.0099 train_eval/loss=0.6256 train_eval/auroc=0.0000
+[step 6750/20000] val/loss=0.6046 val/auroc=0.0099 train_eval/loss=0.6147 train_eval/auroc=0.0000
+[step 7000/20000] val/loss=0.5695 val/auroc=0.0099 train_eval/loss=0.5929 train_eval/auroc=0.0000
+[step 7250/20000] val/loss=0.5701 val/auroc=0.0099 train_eval/loss=0.5940 train_eval/auroc=0.0000
+[step 7500/20000] val/loss=0.6042 val/auroc=0.0099 train_eval/loss=0.6143 train_eval/auroc=0.0000
+[step 7750/20000] val/loss=0.5998 val/auroc=0.0099 train_eval/loss=0.6107 train_eval/auroc=0.0000
+[step 8000/20000] val/loss=0.5777 val/auroc=0.0099 train_eval/loss=0.5929 train_eval/auroc=0.0000
+[step 8250/20000] val/loss=0.5979 val/auroc=0.0099 train_eval/loss=0.6090 train_eval/auroc=0.0000
+[step 8500/20000] val/loss=0.5788 val/auroc=0.0099 train_eval/loss=0.6062 train_eval/auroc=0.0000
+[step 8750/20000] val/loss=0.5916 val/auroc=0.0099 train_eval/loss=0.6037 train_eval/auroc=0.0000
+[step 9000/20000] val/loss=0.5727 val/auroc=0.0099 train_eval/loss=0.5896 train_eval/auroc=0.0000
+[step 9250/20000] val/loss=0.5744 val/auroc=0.0099 train_eval/loss=0.5906 train_eval/auroc=0.0000
+[step 9500/20000] val/loss=0.6091 val/auroc=0.0099 train_eval/loss=0.6186 train_eval/auroc=0.0000
+[step 9750/20000] val/loss=0.5706 val/auroc=0.0099 train_eval/loss=0.5947 train_eval/auroc=0.0000
+[step 10000/20000] val/loss=0.5679 val/auroc=0.0099 train_eval/loss=0.5884 train_eval/auroc=0.0000
+[step 10250/20000] val/loss=0.5688 val/auroc=0.0099 train_eval/loss=0.5916 train_eval/auroc=0.0000
+[step 10500/20000] val/loss=0.5882 val/auroc=0.0099 train_eval/loss=0.6180 train_eval/auroc=0.0000
+[step 10750/20000] val/loss=0.5682 val/auroc=0.0099 train_eval/loss=0.5902 train_eval/auroc=0.0000
+[step 11000/20000] val/loss=0.6112 val/auroc=0.0099 train_eval/loss=0.6454 train_eval/auroc=0.0000
+[step 11250/20000] val/loss=0.5714 val/auroc=0.0099 train_eval/loss=0.5959 train_eval/auroc=0.0000
+[step 11500/20000] val/loss=0.5707 val/auroc=0.0099 train_eval/loss=0.5948 train_eval/auroc=0.0000
+[step 11750/20000] val/loss=0.5679 val/auroc=0.0099 train_eval/loss=0.5883 train_eval/auroc=0.0000
+[step 12000/20000] val/loss=0.5756 val/auroc=0.0099 train_eval/loss=0.5914 train_eval/auroc=0.0000
+[step 12250/20000] val/loss=0.5744 val/auroc=0.0099 train_eval/loss=0.6003 train_eval/auroc=0.0000
+[step 12500/20000] val/loss=0.5709 val/auroc=0.0099 train_eval/loss=0.5886 train_eval/auroc=0.0000
+[step 12750/20000] val/loss=0.7641 val/auroc=0.0099 train_eval/loss=0.8163 train_eval/auroc=0.0000
+[step 13000/20000] val/loss=0.5715 val/auroc=0.0099 train_eval/loss=0.5962 train_eval/auroc=0.0000
+[step 13250/20000] val/loss=0.5684 val/auroc=0.0099 train_eval/loss=0.5879 train_eval/auroc=0.0000
+[step 13500/20000] val/loss=0.6281 val/auroc=0.0099 train_eval/loss=0.6649 train_eval/auroc=0.0000
+[step 13750/20000] val/loss=0.5682 val/auroc=0.0099 train_eval/loss=0.5880 train_eval/auroc=0.0000
+[step 14000/20000] val/loss=0.5775 val/auroc=0.0099 train_eval/loss=0.5927 train_eval/auroc=0.0000
+[step 14250/20000] val/loss=0.5718 val/auroc=0.0099 train_eval/loss=0.5891 train_eval/auroc=0.0000
+[step 14500/20000] val/loss=0.6137 val/auroc=0.0099 train_eval/loss=0.6483 train_eval/auroc=0.0000
+[step 14750/20000] val/loss=0.5679 val/auroc=0.0099 train_eval/loss=0.5896 train_eval/auroc=0.0000
+[step 15000/20000] val/loss=0.5838 val/auroc=0.0099 train_eval/loss=0.6125 train_eval/auroc=0.0000
+[step 15250/20000] val/loss=0.6550 val/auroc=0.0099 train_eval/loss=0.6597 train_eval/auroc=0.0000
+[step 15500/20000] val/loss=0.5747 val/auroc=0.0099 train_eval/loss=0.6007 train_eval/auroc=0.0000
+[step 15750/20000] val/loss=0.5695 val/auroc=0.0099 train_eval/loss=0.5880 train_eval/auroc=0.0000
+[step 16000/20000] val/loss=0.5679 val/auroc=0.0099 train_eval/loss=0.5883 train_eval/auroc=0.0000
+[step 16250/20000] val/loss=0.5776 val/auroc=0.0099 train_eval/loss=0.5929 train_eval/auroc=0.0000
+[step 16500/20000] val/loss=0.6460 val/auroc=0.0099 train_eval/loss=0.6515 train_eval/auroc=0.0000
+[step 16750/20000] val/loss=0.5879 val/auroc=0.0099 train_eval/loss=0.6007 train_eval/auroc=0.0000
+[step 17000/20000] val/loss=0.6343 val/auroc=0.0099 train_eval/loss=0.6720 train_eval/auroc=0.0000
+[step 17250/20000] val/loss=0.5689 val/auroc=0.0099 train_eval/loss=0.5879 train_eval/auroc=0.0000
+[step 17500/20000] val/loss=0.5927 val/auroc=0.0099 train_eval/loss=0.6236 train_eval/auroc=0.0000
+[step 17750/20000] val/loss=0.5694 val/auroc=0.0099 train_eval/loss=0.5880 train_eval/auroc=0.0000
+[step 18000/20000] val/loss=0.5685 val/auroc=0.0099 train_eval/loss=0.5879 train_eval/auroc=0.0000
+[step 18250/20000] val/loss=0.7029 val/auroc=0.0099 train_eval/loss=0.7489 train_eval/auroc=0.0000
+[step 18500/20000] val/loss=0.6011 val/auroc=0.0099 train_eval/loss=0.6336 train_eval/auroc=0.0000
+[step 18750/20000] val/loss=0.5762 val/auroc=0.0099 train_eval/loss=0.6028 train_eval/auroc=0.0000
+[step 19000/20000] val/loss=0.5740 val/auroc=0.0099 train_eval/loss=0.5998 train_eval/auroc=0.0000
+[step 19250/20000] val/loss=0.6436 val/auroc=0.0099 train_eval/loss=0.6493 train_eval/auroc=0.0000
+[step 19500/20000] val/loss=0.5678 val/auroc=0.0099 train_eval/loss=0.5885 train_eval/auroc=0.0000
+[step 19750/20000] val/loss=0.6196 val/auroc=0.0099 train_eval/loss=0.6551 train_eval/auroc=0.0000
+[step 20000/20000] val/loss=0.5739 val/auroc=0.0099 train_eval/loss=0.5995 train_eval/auroc=0.0000
+[run] finished: {'steps': 20000, 'val/loss': 0.5738556385040283, 'val/auroc': 0.009900990099009901, 'train_eval/loss': 0.5995184779167175, 'train_eval/auroc': 0.0, 'hub_roundtrip_ok': True}

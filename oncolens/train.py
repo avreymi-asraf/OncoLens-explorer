@@ -27,13 +27,14 @@ from oncolens.runlog import RunLog, current_exp, run_dir_for
 
 
 def auroc(scores: np.ndarray, labels: np.ndarray) -> float:
-    """Rank-based AUROC (probability that a positive is scored above a negative). nan when one class is absent."""
+    """Rank-based AUROC: the probability that a positive is scored above a negative, a tie counting as half.
+    nan when one class is absent. A model that gives every patient the same score gets 0.5."""
     pos, neg = scores[labels == 1], scores[labels == 0]
     if len(pos) == 0 or len(neg) == 0:
         return float("nan")
-    order = np.argsort(np.concatenate([pos, neg]), kind="mergesort")
-    ranks = np.empty(len(order))
-    ranks[order] = np.arange(1, len(order) + 1)
+    both = np.concatenate([pos, neg])
+    _, inverse, counts = np.unique(both, return_inverse=True, return_counts=True)
+    ranks = (np.cumsum(counts) - (counts - 1) / 2)[inverse]  # average rank within a group of ties
     return float((ranks[: len(pos)].sum() - len(pos) * (len(pos) + 1) / 2) / (len(pos) * len(neg)))
 
 

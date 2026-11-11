@@ -1,0 +1,1 @@
+{"time": 1794431552.544, "step": 2000, "kind": "overfitting", "subject": "val/loss", "severity": "warning", "message": "Validation loss was best at step 500 (0.4612) and is 0.5327 at step 2000, while training loss went from 0.4117 to 0.2610: the model is fitting the training patients only."}

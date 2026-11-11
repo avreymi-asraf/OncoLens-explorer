@@ -1,0 +1,23 @@
+{
+  "state": "finished",
+  "step": 60000,
+  "total_steps": 60000,
+  "heartbeat": 1794431683.820217,
+  "exp": "01-explorer-observe/training",
+  "run": "02-overfit",
+  "commit": "94eeec7",
+  "started": 1794431536.7703362,
+  "wandb_url": "https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/3kfva8ul",
+  "wandb_path": "avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/3kfva8ul",
+  "device": "cpu",
+  "data": {
+    "n_patients": 2000,
+    "n_features": 53,
+    "n_train": 1609,
+    "n_val": 391,
+    "positive_rate_train": 0.7253,
+    "positive_rate_val": 0.7417
+  },
+  "hub_url": "https://huggingface.co/avreymi/oncolens-explorer/tree/main/01-explorer-observe/training/02-overfit",
+  "hub_commit": "e799532768b46ad77a6f6d20ebe3a8b382bc8da4"
+}

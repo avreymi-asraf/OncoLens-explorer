@@ -121,8 +121,7 @@ def checks(run: Run) -> list[str]:
 def layers(rows: list[dict]) -> list[dict]:
     """One dict per layer with the latest probe values: grad, weight, update, and dead (when the layer feeds a ReLU)."""
     names = [k.split("/", 1)[1] for k in keys_under(rows, "update/")]
-    dead = {k.split("/")[1]: series(rows, k)[1][-1] for k in keys_under(rows, "act/") if k.endswith("/dead")}
-    dead_after = dict(zip(names, dead.values()))  # the i-th ReLU follows the i-th weight layer
+    dead_after = {k.split("/")[1]: series(rows, k)[1][-1] for k in keys_under(rows, "act/") if k.endswith("/dead")}
     table = []
     for name in names:
         entry = {"layer": name}
@@ -183,7 +182,7 @@ def report(run: Run) -> str:
                   f"* At step {n['step']}: validation loss {n['val_loss']:.4f}, training loss {n['train_loss']:.4f}, AUROC {n['val_auroc']:.3f}. "
                   f"{a['steps_after_best']} steps were run after the best point.", ""]
     if "layers" in a:
-        lines += ["## Layers (latest probe)", "| Layer | Gradient norm | Weight norm | Update / weight | Update peaked at step | Dead units after it |", "|---|---|---|---|---|---|"]
+        lines += ["## Layers (latest probe)", "| Layer | Gradient norm | Weight norm | Update / weight | Update peaked at step | Dead units |", "|---|---|---|---|---|---|"]
         lines += [f"| {l['layer']} | {l.get('grad', float('nan')):.3g} | {l.get('weight', float('nan')):.3g} | {l.get('update', float('nan')):.2e} | "
                   f"{l['update_peak_step']} | {format(l['dead'], '.0%') if 'dead' in l else 'n/a'} |" for l in a["layers"]]
         lines.append("")
@@ -212,7 +211,7 @@ def render(summary: dict) -> str:
         change = f"  change {entry['change']:+.4f}" if "change" in entry else ""
         lines.append(f"  {key:<26} {sparkline(series(rows, key)[1]):<40} last {entry['last']:.4f} @ {entry['at_step']:<6}{change}")
     if summary.get("layers"):
-        lines.append("  layer        grad norm   update/weight   dead units after it")
+        lines.append("  layer        grad norm   update/weight   dead units")
         lines += [f"  {l['layer']:<12} {l.get('grad', float('nan')):<11.3g} {l.get('update', float('nan')):<15.2e} "
                   f"{format(l['dead'], '.0%') if 'dead' in l else 'n/a'}" for l in summary["layers"]]
     lines += [f"  {name}: {url}" for name, url in summary["links"].items()]

@@ -6,8 +6,8 @@ it reaches the run folder and W&B as it happens. Keys:
     grad/<layer>      gradient norm of the layer's weights          grad/total   norm over all parameters
     weight/<layer>    norm of the layer's weights
     update/<layer>    |change made by this step| / |weights|        (how fast the layer is moving)
-    act/<layer>/dead  fraction of the layer's units that are zero for every validation patient
-    act/<layer>/mean  mean activation over validation patients
+    act/<layer>/dead  fraction of the layer's units (after its ReLU) that are zero for every validation patient
+    act/<layer>/mean  mean activation of the layer's units over validation patients
     pred/mean, pred/std   the predicted probabilities on validation
     pred/ece          expected calibration error on validation (10 bins)
     gap/loss          validation loss minus training loss           (how far the two have parted)
@@ -40,9 +40,9 @@ class Probes:
         self._was_right: torch.Tensor | None = None
         self._forgotten = 0
         self._acts: dict[str, torch.Tensor] = {}
-        for name, module in model.named_modules():  # activation = output of every ReLU
-            if isinstance(module, nn.ReLU):
-                module.register_forward_hook(lambda _m, _i, out, name=name: self._acts.__setitem__(name, out.detach()))
+        relus = [m for m in model.modules() if isinstance(m, nn.ReLU)]
+        for name, module in zip(self.layers, relus):  # the i-th ReLU is the output of the i-th weight layer
+            module.register_forward_hook(lambda _m, _i, out, name=name: self._acts.__setitem__(name, out.detach()))
 
     def due(self, step: int) -> bool:
         return self.every > 0 and (step % self.every == 0 or step == 1)
