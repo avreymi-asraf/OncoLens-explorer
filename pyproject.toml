@@ -1,0 +1,16 @@
+[project]
+name = "oncolens-explorer"
+version = "0.1.0"
+description = "OncoLens experiment code: data in, a watched training run, a model out."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "huggingface-hub>=0.26",
+    "numpy>=1.26",
+    "safetensors>=0.4",
+    "torch>=2.5",
+    "wandb>=0.18",
+]
+
+[tool.uv]
+package = false

@@ -1,0 +1,10 @@
+# Dataset rows are never committed (data rules: aggregates only). The cache is rebuilt from the source.
+.cache/
+# Model weights go to the Hugging Face Hub, not to git.
+*.safetensors
+wandb/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.hub_check/
