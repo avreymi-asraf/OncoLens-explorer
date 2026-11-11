@@ -67,12 +67,23 @@ class Colab:
     def cli(self, *args: str, **kwargs) -> subprocess.CompletedProcess:
         return subprocess.run(["colab", "--auth=adc", *args], env=self.env, **kwargs)
 
-    def ssh(self, command: str, stdin: bytes | None = None, check: bool = True, timeout: int = 1800) -> bytes:
-        """Run one shell line on the VM (in /content). Returns its stdout."""
-        done = self.cli("ssh", "-s", self.session, "-i", str(SSH_KEY), "--", command, input=stdin,
-                        stdin=None if stdin is not None else subprocess.DEVNULL, stdout=subprocess.PIPE, timeout=timeout, check=False)
-        if check and done.returncode != 0:
-            raise RuntimeError(f"command failed on the VM (exit {done.returncode}): {command}")
+    def ssh(self, command: str, stdin: bytes | None = None, check: bool = True, timeout: int = 600) -> bytes:
+        """Run one shell line on the VM (in /content). Returns its stdout. Keep commands short: a long silent
+        command loses its connection, so long work is launched in the background on the VM and polled."""
+        for attempt in range(5):
+            try:
+                done = self.cli("ssh", "-s", self.session, "-i", str(SSH_KEY), "--", command, input=stdin,
+                                stdin=None if stdin is not None else subprocess.DEVNULL, stdout=subprocess.PIPE,
+                                timeout=timeout, check=False)
+            except subprocess.TimeoutExpired:
+                done = None
+            if done is not None and done.returncode != 255:  # 255 is the connection (or the VM still closing the previous one), not the command
+                break
+            time.sleep(5 * (attempt + 1))
+        if done is None or (check and done.returncode != 0):
+            if check:
+                raise RuntimeError(f"command failed on the VM (exit {getattr(done, 'returncode', 'timeout')}): {command}")
+            return b""
         return done.stdout
 
     def start(self, gpu: str | None) -> None:
@@ -125,21 +136,24 @@ def run_colab(args: argparse.Namespace, exp: str) -> int:
         colab.ssh(f"rm -rf {code} && mkdir -p {code} && tar xz -C {code}", stdin=archive)
         env = {name: os.environ[name] for name in (*SECRETS, *PASSED) if os.environ.get(name)}
         colab.upload_env({**env, "ONCOLENS_COMMIT": commit})
-        print("[runner] code and secrets are on the VM; installing the environment (uv sync)...", flush=True)
-        colab.ssh(f"cd {code} && uv sync -q 2>&1 | tail -5")
+        # Install and train in one background job on the VM: both outlive any single connection.
         launch = " ".join(shlex.quote(part) for part in train_command(args, exp, out))
         colab.ssh(f"cd {code} && mkdir -p {out} && set -a && . /content/run.env && set +a && "
-                  f"(nohup {launch} > {out}/train.log 2>&1 & echo $! > /content/train.pid)")
-        print(f"[runner] launched. Watch it: uv run -m oncolens.watch {local_dir} --follow", flush=True)
+                  f"(nohup sh -c 'uv sync -q && {launch}' > {out}/train.log 2>&1 & echo $! > /content/train.pid)")
+        print(f"[runner] launched (the VM installs the environment first). Watch it: uv run -m oncolens.watch {local_dir} --follow", flush=True)
 
         seen_step = -1
         while True:
             alive = colab.ssh("kill -0 $(cat /content/train.pid) 2>/dev/null && echo RUNNING || echo EXITED", check=False, timeout=120)
+            if not alive:  # the connection failed three times in a row; the run itself may be fine
+                print("[runner] cannot reach the VM right now; trying again", flush=True)
+                time.sleep(args.poll)
+                continue
             colab.mirror(out, local_dir)
             status = _read_status(local_dir)
             if status.get("step", -1) != seen_step:
                 seen_step = status.get("step", -1)
-                print(f"[runner] {status.get('state', 'starting')} step {seen_step}/{status.get('total_steps')}"
+                print(f"[runner] {status.get('state', 'installing')} step {seen_step}/{status.get('total_steps')}"
                       + (f"  {status['wandb_url']}" if status.get("wandb_url") else ""), flush=True)
             if b"EXITED" in alive:
                 break
