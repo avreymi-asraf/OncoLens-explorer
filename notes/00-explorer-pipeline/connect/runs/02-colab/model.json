@@ -1,0 +1,93 @@
+{
+  "step": 3000,
+  "exp": "00-explorer-pipeline/connect",
+  "run": "02-colab",
+  "config": {
+    "data": {
+      "study": "msk_chord_2024",
+      "n_patients": 2000,
+      "val_fraction": 0.2,
+      "seed": 0
+    },
+    "model": {
+      "name": "mlp",
+      "hidden": [
+        64,
+        32
+      ],
+      "dropout": 0.1
+    },
+    "train": {
+      "steps": 3000,
+      "batch_size": 64,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "eval_every": 100,
+      "checkpoint_every": 1000,
+      "seed": 0
+    },
+    "track": {
+      "wandb": true,
+      "hub": true
+    }
+  },
+  "feature_names": [
+    "CURRENT_AGE_DEID",
+    "CURRENT_AGE_DEID__missing",
+    "NUM_ICDO_DX",
+    "NUM_ICDO_DX__missing",
+    "GENDER=Female",
+    "GENDER=Male",
+    "STAGE_HIGHEST_RECORDED=Stage 1-3",
+    "STAGE_HIGHEST_RECORDED=Stage 4",
+    "SMOKING_PREDICTIONS_3_CLASSES=Former/Current Smoker",
+    "SMOKING_PREDICTIONS_3_CLASSES=Never",
+    "SMOKING_PREDICTIONS_3_CLASSES=Unknown",
+    "PRIOR_MED_TO_MSK=No prior medications",
+    "PRIOR_MED_TO_MSK=Prior medications to MSK",
+    "PRIOR_MED_TO_MSK=Unknown",
+    "HER2=No",
+    "HER2=Yes",
+    "HER2=__missing",
+    "HR=No",
+    "HR=Yes",
+    "HR=__missing",
+    "HISTORY_OF_PDL1=No",
+    "HISTORY_OF_PDL1=Yes",
+    "HISTORY_OF_PDL1=__missing",
+    "ADRENAL_GLANDS=No",
+    "ADRENAL_GLANDS=Unknown",
+    "ADRENAL_GLANDS=Yes",
+    "BONE=No",
+    "BONE=Unknown",
+    "BONE=Yes",
+    "CNS_BRAIN=No",
+    "CNS_BRAIN=Unknown",
+    "CNS_BRAIN=Yes",
+    "INTRA_ABDOMINAL=No",
+    "INTRA_ABDOMINAL=Unknown",
+    "INTRA_ABDOMINAL=Yes",
+    "LIVER=No",
+    "LIVER=Unknown",
+    "LIVER=Yes",
+    "LUNG=No",
+    "LUNG=Unknown",
+    "LUNG=Yes",
+    "LYMPH_NODES=No",
+    "LYMPH_NODES=Unknown",
+    "LYMPH_NODES=Yes",
+    "PLEURA=No",
+    "PLEURA=Unknown",
+    "PLEURA=Yes",
+    "REPRODUCTIVE_ORGANS=No",
+    "REPRODUCTIVE_ORGANS=Unknown",
+    "REPRODUCTIVE_ORGANS=Yes",
+    "OTHER=No",
+    "OTHER=Unknown",
+    "OTHER=Yes"
+  ],
+  "val/loss": 0.6102390289306641,
+  "val/auroc": 0.7852509388869922,
+  "train_eval/loss": 0.19985820353031158,
+  "train_eval/auroc": 0.9757199300523057
+}

@@ -1,0 +1,23 @@
+{
+  "state": "finished",
+  "step": 40000,
+  "total_steps": 40000,
+  "heartbeat": 1794430718.1010907,
+  "exp": "00-explorer-pipeline/connect",
+  "run": "03-colab-long",
+  "commit": "6a08fdc",
+  "started": 1794430566.9416075,
+  "wandb_url": "https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/12eljx0y",
+  "wandb_path": "avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/12eljx0y",
+  "device": "cpu",
+  "data": {
+    "n_patients": 2000,
+    "n_features": 53,
+    "n_train": 1609,
+    "n_val": 391,
+    "positive_rate_train": 0.7253,
+    "positive_rate_val": 0.7417
+  },
+  "hub_url": "https://huggingface.co/avreymi/oncolens-explorer/tree/main/00-explorer-pipeline/connect/03-colab-long",
+  "hub_commit": "4ec1037d0f3e7f4c6fef5c3771d7a492b3197139"
+}

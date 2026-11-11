@@ -1,0 +1,26 @@
+# The smallest run that exercises every part of the pipeline. Its numbers are not a baseline:
+# the label is a plumbing label (see oncolens/data.py), not the OncoLens prediction target.
+
+[data]
+study = "msk_chord_2024"   # cBioPortal study id; dataset page: OncoLens-data wiki-llm/datasets/msk-chord.md
+n_patients = 2000
+val_fraction = 0.2
+seed = 0
+
+[model]
+name = "mlp"
+hidden = [64, 32]
+dropout = 0.1
+
+[train]
+steps = 300
+batch_size = 64
+lr = 1e-3
+weight_decay = 0.0
+eval_every = 25
+checkpoint_every = 100
+seed = 0
+
+[track]
+wandb = true
+hub = true

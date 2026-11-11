@@ -1,0 +1,35 @@
+{
+  "exp": "00-explorer-pipeline/connect",
+  "run": "04-live-read",
+  "commit": "6a08fdc",
+  "started": 1794430843.3471289,
+  "config": {
+    "data": {
+      "study": "msk_chord_2024",
+      "n_patients": 2000,
+      "val_fraction": 0.2,
+      "seed": 0
+    },
+    "model": {
+      "name": "mlp",
+      "hidden": [
+        64,
+        32
+      ],
+      "dropout": 0.1
+    },
+    "train": {
+      "steps": 60000,
+      "batch_size": 64,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "eval_every": 500,
+      "checkpoint_every": 20000,
+      "seed": 0
+    },
+    "track": {
+      "wandb": true,
+      "hub": true
+    }
+  }
+}
