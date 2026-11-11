@@ -1,0 +1,25 @@
+{
+  "exp": "01-explorer-observe/training",
+  "run": "04-too-cold",
+  "commit": "7913ab6",
+  "started": 1794432208.4692004,
+  "wandb_url": "https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/j3p5n44e",
+  "wandb_path": "avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/j3p5n44e",
+  "device": "cpu",
+  "data": {
+    "n_patients": 2000,
+    "n_features": 53,
+    "n_train": 1609,
+    "n_val": 391,
+    "positive_rate_train": 0.7253,
+    "positive_rate_val": 0.7417
+  },
+  "hub_url": "https://huggingface.co/avreymi/oncolens-explorer/tree/main/01-explorer-observe/training/04-too-cold",
+  "hub_commit": "3b29a3966726c04182c6de379ee8609fde0d6250",
+  "steps": 20000,
+  "val/loss": 0.6576944589614868,
+  "val/auroc": 0.3378456811198361,
+  "train_eval/loss": 0.6600888967514038,
+  "train_eval/auroc": 0.3808543389671471,
+  "hub_roundtrip_ok": true
+}

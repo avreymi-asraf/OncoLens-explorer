@@ -1,0 +1,37 @@
+{
+  "exp": "01-explorer-observe/training",
+  "run": "03-too-hot",
+  "commit": "94eeec7",
+  "started": 1794431960.7925348,
+  "config": {
+    "data": {
+      "study": "msk_chord_2024",
+      "n_patients": 2000,
+      "val_fraction": 0.2,
+      "seed": 0
+    },
+    "model": {
+      "name": "mlp",
+      "hidden": [
+        64,
+        32
+      ],
+      "dropout": 0.1
+    },
+    "train": {
+      "steps": 20000,
+      "batch_size": 64,
+      "lr": 3.0,
+      "weight_decay": 0.0,
+      "eval_every": 250,
+      "checkpoint_every": 20000,
+      "seed": 0
+    },
+    "track": {
+      "wandb": true,
+      "hub": true,
+      "log_every": 25,
+      "probe_every": 50
+    }
+  }
+}

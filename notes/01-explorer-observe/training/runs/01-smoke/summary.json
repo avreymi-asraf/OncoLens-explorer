@@ -1,0 +1,22 @@
+{
+  "exp": "01-explorer-observe/training",
+  "run": "01-smoke",
+  "commit": "94eeec7",
+  "started": 1794431374.9059753,
+  "wandb_url": "https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/7s9ckn8d",
+  "wandb_path": "avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/7s9ckn8d",
+  "device": "cpu",
+  "data": {
+    "n_patients": 2000,
+    "n_features": 53,
+    "n_train": 1609,
+    "n_val": 391,
+    "positive_rate_train": 0.7253,
+    "positive_rate_val": 0.7417
+  },
+  "steps": 3000,
+  "val/loss": 0.6058077812194824,
+  "val/auroc": 0.7843632639125981,
+  "train_eval/loss": 0.2013339251279831,
+  "train_eval/auroc": 0.9749153764729147
+}

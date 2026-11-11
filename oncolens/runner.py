@@ -33,7 +33,7 @@ SECRETS = ("HF_TOKEN", "WANDB_TOKEN")            # sent to the VM in an env file
 PASSED = ("HF_MODEL_REPO", "WANDB_PROJECT")      # optional, not secret
 ADC_PATH = Path.home() / ".config" / "colab-cli" / "adc.json"
 SSH_KEY = Path.home() / ".ssh" / "id_ed25519"
-MIRRORED = ("config.json", "metrics.jsonl", "status.json", "summary.json", "model.json", "train.log")
+MIRRORED = ("config.json", "metrics.jsonl", "events.jsonl", "status.json", "summary.json", "model.json", "train.log")
 
 
 def train_command(args: argparse.Namespace, exp: str, out: str) -> list[str]:

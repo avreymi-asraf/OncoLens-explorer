@@ -19,19 +19,22 @@ from torch import nn
 
 from oncolens.config import RunConfig, load_config
 from oncolens.data import describe, load_cohort
+from oncolens.detect import Monitor
 from oncolens.hub import Hub
 from oncolens.model import build_model
+from oncolens.probes import Probes
 from oncolens.runlog import RunLog, current_exp, run_dir_for
 
 
 def auroc(scores: np.ndarray, labels: np.ndarray) -> float:
-    """Rank-based AUROC (probability that a positive is scored above a negative). nan when one class is absent."""
+    """Rank-based AUROC: the probability that a positive is scored above a negative, a tie counting as half.
+    nan when one class is absent. A model that gives every patient the same score gets 0.5."""
     pos, neg = scores[labels == 1], scores[labels == 0]
     if len(pos) == 0 or len(neg) == 0:
         return float("nan")
-    order = np.argsort(np.concatenate([pos, neg]), kind="mergesort")
-    ranks = np.empty(len(order))
-    ranks[order] = np.arange(1, len(order) + 1)
+    both = np.concatenate([pos, neg])
+    _, inverse, counts = np.unique(both, return_inverse=True, return_counts=True)
+    ranks = (np.cumsum(counts) - (counts - 1) / 2)[inverse]  # average rank within a group of ties
     return float((ranks[: len(pos)].sum() - len(pos) * (len(pos) + 1) / 2) / (len(pos) * len(neg)))
 
 
@@ -72,19 +75,36 @@ def train(cfg: RunConfig, out_dir: Path, exp: str, run: str) -> dict:
         optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.lr, weight_decay=cfg.train.weight_decay)
         sampler = torch.Generator(device="cpu").manual_seed(cfg.train.seed)
         last_eval: dict = {}
+        probes, monitor = Probes(model, cfg.track.probe_every), Monitor()
+        pending: list[dict] = []  # train scalars since the last metrics row
 
         for step in range(1, cfg.train.steps + 1):
             started = time.perf_counter()
             batch = train_idx[torch.randint(len(train_idx), (cfg.train.batch_size,), generator=sampler).to(device)]
-            scalars = {f"train/{k}": v for k, v in training_step(model, optimizer, x[batch], y[batch]).items()}
-            scalars["perf/step_seconds"] = time.perf_counter() - started
-            if step % cfg.train.eval_every == 0 or step == cfg.train.steps:
+            probing = probes.due(step)
+            if probing:
+                probes.before_step()
+            step_scalars = {f"train/{k}": v for k, v in training_step(model, optimizer, x[batch], y[batch]).items()}
+            step_scalars["perf/step_seconds"] = time.perf_counter() - started
+            pending.append(step_scalars)
+            evaluating = step % cfg.train.eval_every == 0 or step == cfg.train.steps
+            saving = hub is not None and (step % cfg.train.checkpoint_every == 0 or step == cfg.train.steps)
+            if not (probing or evaluating or saving or step % cfg.track.log_every == 0):
+                continue  # between metrics rows nothing is written
+            scalars = {k: sum(p[k] for p in pending) / len(pending) for k in pending[0]}
+            pending = []
+            if probing:
+                scalars |= probes.after_step()
+            if evaluating:
                 last_eval = {f"val/{k}": v for k, v in evaluate_split(model, x[val_idx], y[val_idx]).items()}
                 last_eval |= {f"train_eval/{k}": v for k, v in evaluate_split(model, x[train_idx], y[train_idx]).items()}
-                scalars |= last_eval
+                scalars |= last_eval | probes.on_eval(x[train_idx], y[train_idx], x[val_idx], y[val_idx])
                 print(f"[step {step}/{cfg.train.steps}] " + " ".join(f"{k}={v:.4f}" for k, v in last_eval.items()), flush=True)
             log.log(step, **scalars)
-            if hub and (step % cfg.train.checkpoint_every == 0 or step == cfg.train.steps):
+            if probing or evaluating:
+                for event in monitor.update(log.rows):
+                    log.event(event)
+            if saving:
                 log.note(hub_commit=hub.save(model, out_dir, step, {"exp": exp, "run": run, "config": cfg.to_dict(),
                                                                     "feature_names": cohort.feature_names, **last_eval}))
             log.status("running", step)

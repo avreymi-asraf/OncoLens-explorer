@@ -41,6 +41,8 @@ class TrainConfig:
 class TrackConfig:
     wandb: bool = True  # live metrics to Weights & Biases
     hub: bool = True    # checkpoints to the Hugging Face Hub (private repo)
+    log_every: int = 1  # write a metrics row every N steps (train scalars are averaged over the N steps)
+    probe_every: int = 0  # take the in-loop probes (oncolens/probes.py) every N steps; 0 = off
 
 
 @dataclass

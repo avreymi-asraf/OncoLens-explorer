@@ -1,0 +1,87 @@
+[run] 01-explorer-observe/training/04-too-cold on cpu | data {'n_patients': 2000, 'n_features': 53, 'n_train': 1609, 'n_val': 391, 'positive_rate_train': 0.7253, 'positive_rate_val': 0.7417}
+[run] live: https://forge.coreweave.com/wandb/avreymi-asraf-hebrew-university-of-jerusalem/oncolens-explorer/runs/j3p5n44e
+[event warning] step 200: Layer body.0 has moved by less than 1e-06 of its size per step since step 1: it is effectively frozen.
+[event warning] step 200: Layer body.3 has moved by less than 1e-06 of its size per step since step 1: it is effectively frozen.
+[event warning] step 200: Layer head has moved by less than 1e-06 of its size per step since step 1: it is effectively frozen.
+[step 250/20000] val/loss=0.6583 val/auroc=0.3359 train_eval/loss=0.6607 train_eval/auroc=0.3770
+[step 500/20000] val/loss=0.6583 val/auroc=0.3360 train_eval/loss=0.6607 train_eval/auroc=0.3771
+[step 750/20000] val/loss=0.6583 val/auroc=0.3359 train_eval/loss=0.6607 train_eval/auroc=0.3771
+[step 1000/20000] val/loss=0.6583 val/auroc=0.3360 train_eval/loss=0.6606 train_eval/auroc=0.3772
+[step 1250/20000] val/loss=0.6583 val/auroc=0.3360 train_eval/loss=0.6606 train_eval/auroc=0.3772
+[step 1500/20000] val/loss=0.6583 val/auroc=0.3360 train_eval/loss=0.6606 train_eval/auroc=0.3772
+[event warning] step 1500: Training loss is 0.6606 at step 1500, from 0.6607 at step 250: nothing is being learned. Layers move by about 8.6e-08 of their size per step.
+[step 1750/20000] val/loss=0.6583 val/auroc=0.3361 train_eval/loss=0.6606 train_eval/auroc=0.3773
+[step 2000/20000] val/loss=0.6583 val/auroc=0.3361 train_eval/loss=0.6606 train_eval/auroc=0.3773
+[step 2250/20000] val/loss=0.6583 val/auroc=0.3361 train_eval/loss=0.6606 train_eval/auroc=0.3774
+[step 2500/20000] val/loss=0.6583 val/auroc=0.3362 train_eval/loss=0.6606 train_eval/auroc=0.3774
+[step 2750/20000] val/loss=0.6582 val/auroc=0.3362 train_eval/loss=0.6606 train_eval/auroc=0.3775
+[step 3000/20000] val/loss=0.6582 val/auroc=0.3362 train_eval/loss=0.6606 train_eval/auroc=0.3775
+[step 3250/20000] val/loss=0.6582 val/auroc=0.3362 train_eval/loss=0.6606 train_eval/auroc=0.3776
+[step 3500/20000] val/loss=0.6582 val/auroc=0.3360 train_eval/loss=0.6606 train_eval/auroc=0.3776
+[step 3750/20000] val/loss=0.6582 val/auroc=0.3360 train_eval/loss=0.6606 train_eval/auroc=0.3777
+[step 4000/20000] val/loss=0.6582 val/auroc=0.3360 train_eval/loss=0.6606 train_eval/auroc=0.3777
+[step 4250/20000] val/loss=0.6582 val/auroc=0.3360 train_eval/loss=0.6605 train_eval/auroc=0.3777
+[step 4500/20000] val/loss=0.6582 val/auroc=0.3359 train_eval/loss=0.6605 train_eval/auroc=0.3777
+[step 4750/20000] val/loss=0.6582 val/auroc=0.3359 train_eval/loss=0.6605 train_eval/auroc=0.3778
+[step 5000/20000] val/loss=0.6582 val/auroc=0.3359 train_eval/loss=0.6605 train_eval/auroc=0.3779
+[step 5250/20000] val/loss=0.6582 val/auroc=0.3359 train_eval/loss=0.6605 train_eval/auroc=0.3779
+[step 5500/20000] val/loss=0.6582 val/auroc=0.3358 train_eval/loss=0.6605 train_eval/auroc=0.3779
+[step 5750/20000] val/loss=0.6581 val/auroc=0.3359 train_eval/loss=0.6605 train_eval/auroc=0.3780
+[step 6000/20000] val/loss=0.6581 val/auroc=0.3360 train_eval/loss=0.6605 train_eval/auroc=0.3780
+[step 6250/20000] val/loss=0.6581 val/auroc=0.3361 train_eval/loss=0.6605 train_eval/auroc=0.3781
+[step 6500/20000] val/loss=0.6581 val/auroc=0.3362 train_eval/loss=0.6605 train_eval/auroc=0.3781
+[step 6750/20000] val/loss=0.6581 val/auroc=0.3362 train_eval/loss=0.6605 train_eval/auroc=0.3782
+[step 7000/20000] val/loss=0.6581 val/auroc=0.3363 train_eval/loss=0.6605 train_eval/auroc=0.3782
+[step 7250/20000] val/loss=0.6581 val/auroc=0.3364 train_eval/loss=0.6605 train_eval/auroc=0.3782
+[step 7500/20000] val/loss=0.6581 val/auroc=0.3363 train_eval/loss=0.6605 train_eval/auroc=0.3783
+[step 7750/20000] val/loss=0.6581 val/auroc=0.3363 train_eval/loss=0.6604 train_eval/auroc=0.3783
+[step 8000/20000] val/loss=0.6581 val/auroc=0.3364 train_eval/loss=0.6604 train_eval/auroc=0.3784
+[step 8250/20000] val/loss=0.6581 val/auroc=0.3364 train_eval/loss=0.6604 train_eval/auroc=0.3784
+[step 8500/20000] val/loss=0.6581 val/auroc=0.3364 train_eval/loss=0.6604 train_eval/auroc=0.3784
+[step 8750/20000] val/loss=0.6581 val/auroc=0.3365 train_eval/loss=0.6604 train_eval/auroc=0.3785
+[step 9000/20000] val/loss=0.6580 val/auroc=0.3366 train_eval/loss=0.6604 train_eval/auroc=0.3785
+[step 9250/20000] val/loss=0.6580 val/auroc=0.3366 train_eval/loss=0.6604 train_eval/auroc=0.3786
+[step 9500/20000] val/loss=0.6580 val/auroc=0.3366 train_eval/loss=0.6604 train_eval/auroc=0.3786
+[step 9750/20000] val/loss=0.6580 val/auroc=0.3366 train_eval/loss=0.6604 train_eval/auroc=0.3787
+[step 10000/20000] val/loss=0.6580 val/auroc=0.3367 train_eval/loss=0.6604 train_eval/auroc=0.3787
+[step 10250/20000] val/loss=0.6580 val/auroc=0.3368 train_eval/loss=0.6604 train_eval/auroc=0.3788
+[step 10500/20000] val/loss=0.6580 val/auroc=0.3369 train_eval/loss=0.6604 train_eval/auroc=0.3788
+[step 10750/20000] val/loss=0.6580 val/auroc=0.3370 train_eval/loss=0.6604 train_eval/auroc=0.3789
+[step 11000/20000] val/loss=0.6580 val/auroc=0.3369 train_eval/loss=0.6604 train_eval/auroc=0.3789
+[step 11250/20000] val/loss=0.6580 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3790
+[step 11500/20000] val/loss=0.6580 val/auroc=0.3370 train_eval/loss=0.6603 train_eval/auroc=0.3790
+[step 11750/20000] val/loss=0.6580 val/auroc=0.3370 train_eval/loss=0.6603 train_eval/auroc=0.3791
+[step 12000/20000] val/loss=0.6579 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3792
+[step 12250/20000] val/loss=0.6579 val/auroc=0.3370 train_eval/loss=0.6603 train_eval/auroc=0.3792
+[step 12500/20000] val/loss=0.6579 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3793
+[step 12750/20000] val/loss=0.6579 val/auroc=0.3370 train_eval/loss=0.6603 train_eval/auroc=0.3794
+[step 13000/20000] val/loss=0.6579 val/auroc=0.3370 train_eval/loss=0.6603 train_eval/auroc=0.3794
+[step 13250/20000] val/loss=0.6579 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3795
+[step 13500/20000] val/loss=0.6579 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3795
+[step 13750/20000] val/loss=0.6579 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3796
+[step 14000/20000] val/loss=0.6579 val/auroc=0.3368 train_eval/loss=0.6603 train_eval/auroc=0.3796
+[step 14250/20000] val/loss=0.6579 val/auroc=0.3369 train_eval/loss=0.6603 train_eval/auroc=0.3797
+[step 14500/20000] val/loss=0.6579 val/auroc=0.3370 train_eval/loss=0.6602 train_eval/auroc=0.3798
+[step 14750/20000] val/loss=0.6579 val/auroc=0.3371 train_eval/loss=0.6602 train_eval/auroc=0.3798
+[step 15000/20000] val/loss=0.6579 val/auroc=0.3371 train_eval/loss=0.6602 train_eval/auroc=0.3799
+[step 15250/20000] val/loss=0.6578 val/auroc=0.3371 train_eval/loss=0.6602 train_eval/auroc=0.3799
+[step 15500/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3800
+[step 15750/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3800
+[step 16000/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3801
+[step 16250/20000] val/loss=0.6578 val/auroc=0.3373 train_eval/loss=0.6602 train_eval/auroc=0.3801
+[step 16500/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3802
+[step 16750/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3802
+[step 17000/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3803
+[step 17250/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3803
+[step 17500/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3804
+[step 17750/20000] val/loss=0.6578 val/auroc=0.3372 train_eval/loss=0.6602 train_eval/auroc=0.3805
+[step 18000/20000] val/loss=0.6578 val/auroc=0.3373 train_eval/loss=0.6601 train_eval/auroc=0.3805
+[step 18250/20000] val/loss=0.6577 val/auroc=0.3373 train_eval/loss=0.6601 train_eval/auroc=0.3806
+[step 18500/20000] val/loss=0.6577 val/auroc=0.3374 train_eval/loss=0.6601 train_eval/auroc=0.3806
+[step 18750/20000] val/loss=0.6577 val/auroc=0.3375 train_eval/loss=0.6601 train_eval/auroc=0.3806
+[step 19000/20000] val/loss=0.6577 val/auroc=0.3375 train_eval/loss=0.6601 train_eval/auroc=0.3807
+[step 19250/20000] val/loss=0.6577 val/auroc=0.3376 train_eval/loss=0.6601 train_eval/auroc=0.3807
+[step 19500/20000] val/loss=0.6577 val/auroc=0.3377 train_eval/loss=0.6601 train_eval/auroc=0.3808
+[step 19750/20000] val/loss=0.6577 val/auroc=0.3378 train_eval/loss=0.6601 train_eval/auroc=0.3808
+[step 20000/20000] val/loss=0.6577 val/auroc=0.3378 train_eval/loss=0.6601 train_eval/auroc=0.3809
+[run] finished: {'steps': 20000, 'val/loss': 0.6576944589614868, 'val/auroc': 0.3378456811198361, 'train_eval/loss': 0.6600888967514038, 'train_eval/auroc': 0.3808543389671471, 'hub_roundtrip_ok': True}
